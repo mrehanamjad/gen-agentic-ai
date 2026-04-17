@@ -1,0 +1,29 @@
+# --- Core Orchestration ---
+langchain
+langchain-core
+langchain-community
+langgraph
+
+# --- Provider Integrations ---
+langchain-google-genai
+google-generativeai
+langchain-groq
+groq
+
+# --- Vector Stores & Embeddings ---
+chromadb
+faiss-cpu
+tiktoken
+
+# --- Web & Scraper Tools ---
+requests
+httpx
+beautifulsoup4
+duckduckgo-search
+
+# --- Utilities & DX ---
+python-dotenv
+pydantic
+tenacity
+rich
+typer
