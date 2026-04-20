@@ -3,6 +3,7 @@ langchain
 langchain-core
 langchain-community
 langgraph
+langchain-text-splitters
 
 # --- Provider Integrations ---
 langchain-google-genai
@@ -11,19 +12,32 @@ langchain-groq
 groq
 
 # --- Vector Stores & Embeddings ---
+langchain-chroma
 chromadb
 faiss-cpu
 tiktoken
 
-# --- Web & Scraper Tools ---
-requests
-httpx
+# --- Document Loaders & Scraping ---
+pypdf
+python-docx
+unstructured
 beautifulsoup4
 duckduckgo-search
+requests
+httpx
+aiohttp
 
-# --- Utilities & DX ---
+# --- Utilities & Data ---
 python-dotenv
 pydantic
 tenacity
 rich
 typer
+numpy
+pandas
+
+
+# --- API & Ops ---
+fastapi
+uvicorn
+langsmith

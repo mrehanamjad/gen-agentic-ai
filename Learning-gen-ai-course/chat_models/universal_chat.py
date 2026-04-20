@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
-from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
+from langchain_core.messages import HumanMessage, AIMessage, SystemMessage, BaseMessage
 
 load_dotenv()
 
@@ -35,7 +35,7 @@ def main():
         temperature=0.7
     )
 
-    chat_history = [SystemMessage(content="You are a helpful CLI assistant.")]
+    chat_history: list[BaseMessage] = [SystemMessage(content="You are a helpful CLI assistant.")]
 
     print(f"\n[System] Using {selected['label']}. Type '/model' to switch or 'exit' to quit.")
 
@@ -63,8 +63,9 @@ def main():
         
         try:
             for chunk in llm.stream(chat_history):
-                print(chunk.content, end="", flush=True)
-                full_response += chunk.content
+                content = chunk.content if isinstance(chunk.content, str) else str(chunk.content)
+                print(content, end="", flush=True)
+                full_response += content
             print()
             chat_history.append(AIMessage(content=full_response))
         except Exception as e:

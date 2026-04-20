@@ -1,5 +1,5 @@
 from langchain_groq import ChatGroq
-from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
+from langchain_core.messages import HumanMessage, AIMessage, SystemMessage, BaseMessage
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -13,7 +13,7 @@ def main():
         # max_retries=2,
     )
 
-    chat_history = [
+    chat_history: list[BaseMessage] = [
         SystemMessage(content="You are a fast, concise AI running on Groq LPU technology.")
     ]
 
@@ -35,8 +35,9 @@ def main():
             # Using .stream() for that real-time terminal feel
             for chunk in llm.stream(chat_history):
                 content = chunk.content
-                print(content, end="", flush=True)
-                full_response += content
+                if isinstance(content, str):
+                    print(content, end="", flush=True)
+                    full_response += content
             
             print() # New line after stream ends
             chat_history.append(AIMessage(content=full_response))

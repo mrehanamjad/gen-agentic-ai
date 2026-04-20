@@ -1,0 +1,311 @@
+Linux & Shell: An Easy World Guide to the Terminal
+Welcome to the easy world of Linux and the terminal!
+This is your complete end-to-end course. By the end, you’ll feel comfortable typing commands, moving through files, controlling programs, and even using powerful tricks like pipes and redirection.
+
+Let’s begin your journey. 🐧
+
+1. What is Linux?
+Linux is the engine behind millions of computers, phones, servers, and even your smart TV.
+It’s an operating system – just like Windows or macOS – but free and open (anyone can see how it works).
+
+Why use the terminal?
+The terminal is a text window where you talk directly to Linux.
+No mouse, no pretty buttons – just your keyboard. It sounds scary, but it’s actually faster and more powerful once you learn a few magic words.
+
+Think of it like this:
+The graphical desktop is like riding a bike with training wheels.
+The terminal is like flying a spaceship – and you will learn to fly it.
+
+2. Opening the Terminal
+Look for an app called:
+
+Terminal (Linux, ChromeOS)
+
+Konsole, GNOME Terminal, Terminator (different flavors)
+
+On macOS: Terminal (it’s also Unix-like)
+
+On Windows: install WSL (Windows Subsystem for Linux) or use Git Bash
+
+Once opened, you’ll see something like:
+
+text
+user@computer:~$
+That’s the prompt. It means “I’m ready for your command.”
+
+3. First Steps: Who, Where, What?
+Let’s try some simple commands.
+
+bash
+whoami
+Tells you your username.
+
+bash
+pwd
+Print Working Directory – shows where you are right now (like “which folder am I in?”).
+
+bash
+ls
+List – shows what’s inside the current folder.
+
+bash
+echo "Hello, easy world!"
+Prints text back to you.
+
+💡 Tip: Press Enter after every command.
+
+4. File System Navigation
+Your files are organised in a tree of folders (called “directories”).
+
+Command	Meaning	Example
+pwd	Where am I?	/home/yourname
+ls	What’s here?	Documents Music
+cd folder	Change directory – go into folder	cd Documents
+cd ..	Go up one level (parent folder)	cd ..
+cd ~	Go to your home folder	cd ~
+cd /	Go to the root (top of the whole system)	cd /
+Try it yourself:
+bash
+pwd
+ls
+cd Documents
+pwd
+ls
+cd ..
+pwd
+Making and removing folders:
+bash
+mkdir my_easy_folder   # make directory
+rmdir my_easy_folder   # remove empty directory
+Creating and deleting files:
+bash
+touch hello.txt        # create an empty file
+rm hello.txt           # delete file (careful – no undo!)
+Copy and move:
+bash
+cp source.txt dest.txt     # copy file
+mv oldname.txt newname.txt # move or rename
+5. Understanding the Shell (bash & zsh)
+The shell is the program that reads your commands and runs them.
+The most common shell is bash. Many modern Linux systems (and macOS) use zsh – they are very similar.
+
+Check which shell you have:
+bash
+echo $SHELL
+Basic shell features:
+Arguments – extra info after a command:
+ls -l (the -l is an argument that makes listing “long”)
+
+Options – start with - or -- : --help shows instructions.
+
+Quotes – use " " for text with spaces: echo "Hello world"
+
+Getting help:
+bash
+command --help
+man command   # opens the manual (press q to quit)
+Example:
+
+bash
+ls --help
+man ls
+6. Redirection: > and <
+Normally, a command prints output to the terminal.
+Redirection sends that output to a file instead.
+
+> – Send output to a file (overwrites)
+bash
+echo "Hello" > greeting.txt
+Now greeting.txt contains Hello.
+
+bash
+cat greeting.txt   # shows the file content
+>> – Append to a file (adds, doesn’t erase)
+bash
+echo "World" >> greeting.txt
+Now the file contains:
+
+text
+Hello
+World
+< – Use a file as input
+bash
+sort < greeting.txt
+This sorts the lines in greeting.txt (but doesn’t change the file).
+
+7. Pipes: |
+A pipe takes the output of one command and feeds it as input to another command.
+Think of it as a real pipe connecting two programs.
+
+Example: ls + grep
+grep searches for text.
+
+bash
+ls | grep "Doc"
+This lists all files, then shows only those containing “Doc” (like Documents).
+
+More pipe examples:
+bash
+# Show only first 5 lines
+ls -l | head -5
+
+# Count how many files in current folder
+ls | wc -l
+
+# Show processes, then search for "firefox"
+ps aux | grep firefox
+You can chain many pipes:
+
+bash
+history | grep "cd" | tail -3
+(Find last 3 times you used cd in command history.)
+
+8. Managing Processes
+A process is a running program. Your terminal can see and control them.
+
+ps – Show processes
+bash
+ps               # processes in this terminal
+ps aux           # all processes on the system (detailed)
+Columns you’ll see:
+PID = Process ID (a unique number)
+%CPU, %MEM = usage
+CMD = command name
+
+top – Live process monitor
+bash
+top
+Shows a real‑time table of processes, sorted by CPU usage.
+Press q to quit.
+
+Better version: htop (install if missing) – friendlier colours.
+
+kill – Stop a process
+Find the PID, then:
+
+bash
+kill PID            # politely ask to stop
+kill -9 PID         # force stop (use carefully)
+Example:
+
+bash
+ps aux | grep firefox
+# Suppose firefox has PID 1234
+kill 1234
+Ctrl+C – Interrupt current process
+If a command runs forever (e.g., top or a stuck script), press Ctrl+C to stop it.
+
+Background & foreground
+Add & after a command to run it in the background:
+
+bash
+firefox &
+jobs shows background tasks.
+fg brings a background job to foreground.
+
+9. Putting It All Together (Real Examples)
+Example 1: Save a list of large files to a file
+bash
+ls -lh | grep "M" > big_files.txt
+Example 2: Count how many bash processes are running
+bash
+ps aux | grep bash | wc -l
+Example 3: Find a process by name and kill it
+bash
+ps aux | grep "chrome" | awk '{print $2}' | xargs kill
+(Don’t worry about awk and xargs yet – they are advanced pipes.)
+
+Example 4: Create a backup of a folder
+bash
+cp -r important/ important_backup/
+Example 5: Watch a file grow in real time
+bash
+tail -f logfile.txt
+Press Ctrl+C to stop.
+
+10. Your Own “Cheat Sheet”
+Keep these commands close:
+
+Task	Command
+Where am I?	pwd
+List files	ls -la
+Go home	cd ~
+Create file	touch file.txt
+Read file	cat file.txt
+Copy	cp source dest
+Move/rename	mv old new
+Delete (careful)	rm file.txt
+Search inside files	grep "word" *
+See running processes	ps aux
+Live monitor	top (or htop)
+Stop a process	kill PID
+Send output to file	command > file
+Append to file	command >> file
+Use file as input	command < file
+Pipe output	command1 | command2
+Get help	command --help or man command
+11. Small Exercises to Become Comfortable
+Try these in your terminal. No hurry – play and explore.
+
+Navigate
+
+Go to your home folder.
+
+Create a folder called terminal_practice.
+
+Inside it, create three empty files: a.txt, b.txt, c.txt.
+
+List them. Delete b.txt.
+
+Redirection
+
+Write your name into a file me.txt using echo and >.
+
+Append your favourite colour to the same file using >>.
+
+Display the file with cat.
+
+Pipes
+
+Run ls -l /usr/bin – you get a long list.
+
+Pipe to head -10 to see only first 10 lines.
+
+Then pipe to grep zip – does any line contain “zip”?
+
+Processes
+
+Open a second terminal tab (or run xeyes if available).
+
+In the first terminal, run ps aux | grep xeyes to find its PID.
+
+Kill it using kill PID.
+
+Fun final challenge
+
+Create a one‑line command that:
+lists all .txt files in your home folder,
+counts how many there are,
+and saves that number to a file count.txt.
+
+Hint: ls ~/*.txt | wc -l > count.txt
+
+12. What’s Next?
+You are now comfortable in the terminal – congratulations! 🎉
+From here you can learn:
+
+Scripting – write your own commands in a file (bash scripts).
+
+Permissions – chmod, chown (who can read/write/execute).
+
+Environment variables – export PATH, $HOME.
+
+Editors – nano, vim, emacs for editing files inside the terminal.
+
+Network commands – ping, curl, ssh.
+
+Remember: The terminal is patient. You won’t break anything by typing.
+Try yes (then Ctrl+C to stop) – it’s harmless and funny.
+
+Final advice: Keep a terminal open while you learn. Type every command you see.
+Mistakes teach faster than perfection.
