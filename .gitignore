@@ -1,2 +1,6 @@
 Langchain-Practical-Learning/.env
 Learning-gen-ai-course/.env
+ai-sql-tool/.env
+.env
+*.env
+
